@@ -11,6 +11,12 @@ interface Pacientes {
   edad: number;
 }
 
+interface NumeroPacientesPorEspecialidad {
+  medicoDeFamilia: number;
+  pediatria: number;
+  cardiologia: number;
+}
+
 const pacientes: Pacientes[] = [
   {
     id: 1,
@@ -75,7 +81,37 @@ const pacientes: Pacientes[] = [
 ];
 
 // APARTADO 5
-// Pendiente de hacer la parte opcional
+
+const totalPacientesAsignadosPorEspecialidad = (
+  pacientes: Pacientes[],
+  especialidad: Especialidad
+): number => {
+  let totalPacientes = 0;
+  for (let i = 0; i < pacientes.length; i++) {
+    if (pacientes[i].especialidad === especialidad) {
+      totalPacientes++;
+    }
+  }
+  return totalPacientes;
+};
+
+const cuentaPacientesPorEspecialidad = (
+  pacientes: Pacientes[]
+): NumeroPacientesPorEspecialidad => {
+  return {
+    medicoDeFamilia: totalPacientesAsignadosPorEspecialidad(
+      pacientes,
+      "Medico de familia"
+    ),
+    pediatria: totalPacientesAsignadosPorEspecialidad(pacientes, "Pediatra"),
+    cardiologia: totalPacientesAsignadosPorEspecialidad(
+      pacientes,
+      "Cardiólogo"
+    ),
+  };
+};
+
+console.log(cuentaPacientesPorEspecialidad(pacientes));
 
 // APARTADO 4
 
